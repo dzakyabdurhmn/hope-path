@@ -23,6 +23,7 @@ import Link from "next/link";
 import {
   Bell,
   CircleUser,
+  Coins,
   Home,
   LineChart,
   Menu,
@@ -30,6 +31,7 @@ import {
   Package2,
   Search,
   ShoppingCart,
+  SquareChartGantt,
   Users,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -62,37 +64,36 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
               <Package2 className="h-6 w-6" />
               <span className="">Shift</span>
             </Link>
-            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-              <Bell className="h-4 w-4" />
-              <span className="sr-only">Toggle notifications</span>
-            </Button>
           </div>
           <div className="flex-1">
-            <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-y-3">
               <Link
-                href="#"
+                href="/dash"
                 className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
               >
                 <Home className="h-4 w-4" />
+                Home
+              </Link>
+              <Link
+                href="/dash/overview"
+                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+              >
+                <SquareChartGantt className="h-4 w-4" />
                 Overview
+              </Link>
+              <Link
+                href="/dash/debt"
+                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+              >
+                <Coins className="h-4 w-4" />
+                Debt analyzer
               </Link>
             </nav>
           </div>
           <div className="mt-auto p-4">
-            <Card x-chunk="dashboard-02-chunk-0">
-              <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
+            <Button size="sm" className="w-full">
+              Help
+            </Button>
           </div>
         </div>
       </div>
@@ -110,68 +111,33 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
+              <nav className="grid gap-2 text-lg font-medium p-2">
                 <Link
-                  href="#"
-                  className="flex items-center gap-2 text-lg font-semibold"
+                  href="/dash"
+                  className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
                 >
-                  <Package2 className="h-6 w-6" />
-                  <span className="sr-only">Acme Inc</span>
+                  <Home className="h-4 w-4" />
+                  Home
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  href="/dash/overview"
+                  className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
                 >
-                  <Home className="h-5 w-5" />
-                  Dashboard
+                  <SquareChartGantt className="h-4 w-4" />
+                  Overview
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                  href="/dash/debt"
+                  className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
                 >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <LineChart className="h-5 w-5" />
-                  Analytics
+                  <Coins className="h-4 w-4" />
+                  Debt analyzer
                 </Link>
               </nav>
               <div className="mt-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>
-                      Unlock all features and get unlimited access to our
-                      support team.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="w-full">
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
+                <Button size="sm" className="w-full">
+                  Help
+                </Button>
               </div>
             </SheetContent>
           </Sheet>
@@ -180,11 +146,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             <UserButton />
           </div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-center"></div>
-
-          {children}
-        </main>
+        <main>{children}</main>
       </div>
     </div>
   );
