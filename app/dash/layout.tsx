@@ -1,6 +1,4 @@
 import { cn } from "@/lib/utils";
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
 import Slidebar from "@/components/slidebar";
 
 export const metadata = {
@@ -14,10 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="">
-        <ClerkProvider>{children}</ClerkProvider>
-      </body>
-    </html>
+    <Slidebar>
+      <div className="flex justify-center items-center mx-auto relative flex-col ">
+        {children}
+      </div>
+    </Slidebar>
   );
 }
