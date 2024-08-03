@@ -7,66 +7,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model dailytask {
-  id              String     @id
-  task_id         String     @unique(map: "task_id")
-  taskDescription String
-  userId          Int
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime
-  task_name       String
-  task_status     Status
-  user            user       @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
-  dailytask       dailytask  @relation("dailytaskTodailytask", fields: [task_id], references: [id], onUpdate: Restrict, map: "Task_fk")
-  other_dailytask dailytask? @relation("dailytaskTodailytask")
+model UserTask {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  taskId    Int
+  note      String
+  userId    Int
+
+  user      User     @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
+  task      Task     @relation(fields: [taskId], references: [id], onUpdate: Restrict, map: "Task_fk")
 
   @@index([userId], map: "DailyTask_userId_fkey")
 }
 
-model debt {
+model Debt {
   id     Int      @id @default(autoincrement())
   userId Int
   date   DateTime
   amount Float
   type   String
   note   String?
-  user   user     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
+  user   User     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
 
   @@index([userId], map: "Debt_userId_fkey")
 }
 
-model rehabilition {
-  id                  Int    @id @default(autoincrement())
-  rehabilitionName    String
-  rehabilitionAddress String
-  rehabilitionUser    String
+model Rehabilitation {
+  id      Int    @id @default(autoincrement())
+  name    String
+  address String
+  user    String
 }
 
-model task {
-  id        Int    @id @default(autoincrement())
-  task_name String @db.VarChar(255)
-  task_poin Int    @db.TinyInt
-  body      String @db.Text
+model Task {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(255)
+  points    Int        @db.TinyInt
+  body      String     @db.Text
+  userTasks UserTask[] 
 }
 
-model user {
-  id            Int         @id @default(autoincrement())
-  username      String      @unique(map: "User_username_key")
-  email         String      @unique(map: "User_email_key")
-  clerk_user_Id String      @db.VarChar(225)
-  dailytask     dailytask[]
-  debt          debt[]
-}
-
-enum Status {
-  done
-  pending
-}
-
-
-model CelrkUser {
-  id              String       @id @default(cuid())
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-  clerkUserId     String?      @unique
+model User {
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  clerkUserId String?   @unique
+  tasks      UserTask[]
+  debts      Debt[]
 }

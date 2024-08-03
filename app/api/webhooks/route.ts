@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { string } from "zod";
 
 // Clerk Webhook: create or delete a user in the database by Clerk ID
 export async function POST(req: Request) {
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
     let user = null;
     switch (evt.type) {
       case "user.created": {
-        user = await prisma.celrkUser.upsert({
+        user = await prisma.user.upsert({
           where: {
             clerkUserId,
           },
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
         break;
       }
       case "user.deleted": {
-        user = await prisma.celrkUser.delete({
+        user = await prisma.user.delete({
           where: {
             clerkUserId,
           },

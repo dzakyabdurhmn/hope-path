@@ -1,10 +1,12 @@
 import * as React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { CircleCheckBig, MapPinIcon } from "lucide-react";
+import { MapPinIcon } from "lucide-react";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import Image from "next/image";
+import getRandomQuote from "@/lib/mock";
 function DashboardPage() {
+  const quote = getRandomQuote();
+
   return (
     <div className="container mx-auto p-4">
       <div className="container mx-auto p-4">
@@ -89,10 +91,7 @@ function DashboardPage() {
           <div className="flex flex-col min-w-full">
             <Card className="w-full">
               <CardContent className="p-5  rounded-lg border border-lime-400 bg-[#E5F8A3]  italic">
-                <p className="max-w-xl">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                  mollitia animi sunt sequi fugiat ea dicta, repudiandae
-                </p>
+                <p className="max-w-xl">{quote}</p>
               </CardContent>
             </Card>
           </div>
