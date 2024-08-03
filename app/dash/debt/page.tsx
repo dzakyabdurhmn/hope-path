@@ -115,7 +115,7 @@ function DashboardPage() {
             </TableFooter>
           </Table>
         </div>
-        <Button className="rounded-full bg-purple-500">
+        <Button className="rounded-full bg-purple-500 mt-10">
           Generate AI Analysis
         </Button>
       </div>

@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model dailytask {
+  id              String     @id
+  task_id         String     @unique(map: "task_id")
+  taskDescription String
+  userId          Int
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime
+  task_name       String
+  task_status     Status
+  user            user       @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
+  dailytask       dailytask  @relation("dailytaskTodailytask", fields: [task_id], references: [id], onUpdate: Restrict, map: "Task_fk")
+  other_dailytask dailytask? @relation("dailytaskTodailytask")
+
+  @@index([userId], map: "DailyTask_userId_fkey")
+}
+
+model debt {
+  id     Int      @id @default(autoincrement())
+  userId Int
+  date   DateTime
+  amount Float
+  type   String
+  note   String?
+  user   user     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
+
+  @@index([userId], map: "Debt_userId_fkey")
+}
+
+model rehabilition {
+  id                  Int    @id @default(autoincrement())
+  rehabilitionName    String
+  rehabilitionAddress String
+  rehabilitionUser    String
+}
+
+model task {
+  id        Int    @id @default(autoincrement())
+  task_name String @db.VarChar(255)
+  task_poin Int    @db.TinyInt
+  body      String @db.Text
+}
+
+model user {
+  id            Int         @id @default(autoincrement())
+  username      String      @unique(map: "User_username_key")
+  email         String      @unique(map: "User_email_key")
+  clerk_user_Id String      @db.VarChar(225)
+  dailytask     dailytask[]
+  debt          debt[]
+}
+
+enum Status {
+  done
+  pending
+}
+
+
+model CelrkUser {
+  id              String       @id @default(cuid())
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  clerkUserId     String?      @unique
+}
