@@ -27,10 +27,8 @@ export const completeTask = async (prevState: any, formData: FormData) => {
     };
   }
 
-  console.log(`loremsjwsjwsjwjwjsjwj ${validatedFields.data.id}`);
-
   try {
-    await db.userTask.create({
+    await db.usertask.create({
       data: {
         taskId: Number(validatedFields.data.id),
         note: validatedFields.data.note,

@@ -28,7 +28,8 @@ export async function POST(req: Request) {
             clerkUserId,
           },
           create: {
-            clerkUserId,
+            clerkUserId: clerkUserId,
+            place: "",
           },
         });
         break;

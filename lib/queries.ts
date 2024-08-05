@@ -16,7 +16,7 @@ export async function GetUser() {
 export async function GetFinisedTasks() {
   const user = await GetUser();
 
-  const finishedTasks = await db.userTask.findMany({
+  const finishedTasks = await db.usertask.findMany({
     where: {
       userId: user?.id as any,
     },
@@ -45,7 +45,7 @@ export async function GetTask() {
 export async function GetFinisedTask() {
   const user = await GetUser();
 
-  const finishedTasks = await db.userTask.findMany({
+  const finishedTasks = await db.usertask.findMany({
     where: {
       userId: user?.id as any,
     },
@@ -82,11 +82,30 @@ export async function getTotalTaskCount() {
 export async function GetDebt() {
   const user = await GetUser();
 
-  const finishedTasks = await db.debt.findMany({
+  const debt = await db.debt.findMany({
     where: {
       userId: user?.id as any,
     },
   });
 
-  return finishedTasks;
+  const totalAmount = debt.reduce((acc, task) => acc + task.amount, 0);
+
+  return { debt, totalAmount };
+}
+
+export async function GetPlace(q: string) {
+  const place = await db.rehabilitation.findMany({
+    take: 10,
+    where: {
+      OR: [
+        {
+          provinsi: {
+            contains: q,
+          },
+        },
+      ],
+    },
+  });
+
+  return place;
 }

@@ -7,51 +7,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UserTask {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  taskId    Int
-  note      String
-  userId    Int
-
-  user      User     @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
-  task      Task     @relation(fields: [taskId], references: [id], onUpdate: Restrict, map: "Task_fk")
-
-  @@index([userId], map: "DailyTask_userId_fkey")
-}
-
-model Debt {
+model debt {
   id     Int      @id @default(autoincrement())
   userId Int
-  date   DateTime
+  date   DateTime @default(now())
   amount Float
   type   String
   note   String?
-  user   User     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
+  user   user     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
 
   @@index([userId], map: "Debt_userId_fkey")
 }
 
-model Rehabilitation {
-  id      Int    @id @default(autoincrement())
-  name    String
-  address String
-  user    String
+model rehabilitation {
+  id       Int                  @id @default(autoincrement())
+  provinsi String?              @db.VarChar(255)
+  name     String?              @db.VarChar(255)
+  type     rehabilitation_type?
 }
 
-model Task {
-  id        Int        @id @default(autoincrement())
-  name      String     @db.VarChar(255)
-  points    Int        @db.TinyInt
-  body      String     @db.Text
-  userTasks UserTask[] 
+model task {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  points   Int        @db.TinyInt
+  body     String     @db.Text
+  usertask usertask[]
 }
 
-model User {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  clerkUserId String?   @unique
-  tasks      UserTask[]
-  debts      Debt[]
+model user {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  clerkUserId String?    @unique(map: "User_clerkUserId_key")
+  place       String     @db.VarChar(225)
+  debt        debt[]
+  usertask    usertask[]
+}
+
+model usertask {
+  id        Int      @id @default(autoincrement())
+  taskId    Int
+  note      String
+  userId    Int
+  createdAt DateTime @default(now())
+  user      user     @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
+  task      task     @relation(fields: [taskId], references: [id], onUpdate: Restrict, map: "Task_fk")
+
+  @@index([userId], map: "DailyTask_userId_fkey")
+  @@index([taskId], map: "Task_fk")
+}
+
+enum rehabilitation_type {
+  Rawat_Inap                       @map("Rawat Inap")
+  Rehabilitasi_Narkoba_Rawat_Jalan @map("Rehabilitasi Narkoba Rawat Jalan")
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function Landing() {
@@ -6,9 +7,12 @@ function Landing() {
       <div className="text-gray-300 container mx-auto p-8 overflow-hidden md:rounded-lg md:p-10 lg:p-12">
         <div className="flex justify-between">
           <h1 className="font-serif text-3xl font-medium">Shift</h1>
-          <a className="self-start px-3 py-2 leading-none text-gray-200 border border-gray-800 rounded-lg focus:outline-none focus:shadow-outline bg-gradient-to-b hover:from-indigo-500 from-gray-900 to-black">
+          <Link
+            href="/dash"
+            className="self-start px-3 py-2 leading-none text-gray-200 border border-gray-800 rounded-lg focus:outline-none focus:shadow-outline bg-gradient-to-b hover:from-indigo-500 from-gray-900 to-black"
+          >
             Join now
-          </a>
+          </Link>
         </div>
         <div className="h-32 md:h-40" />
         <p className="font-sans text-4xl font-bold text-gray-200 max-w-5xl lg:text-7xl lg:pr-24 md:text-6xl">
