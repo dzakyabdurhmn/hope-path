@@ -1,0 +1,272 @@
+
+SET time_zone = "+00:00";
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE debt (
+  id int NOT NULL,
+  userId int NOT NULL,
+  date datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  amount double NOT NULL,
+  type varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  note varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+)  DEFAULT  COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO debt (id, userId, date, amount, type, note) VALUES
+(24, 3, '2024-08-05 00:22:08.394', 900000000000, 'berjudi', 'tadi kalah aku yang nge slot'),
+(25, 3, '2024-08-05 00:33:24.497', -8000000000, 'haji ke makkah', 'naik buisnis class '),
+(26, 3, '2024-08-05 00:34:40.423', -10000000, 'bermalam dengan lc', 'tadi ke hotem buat ngewek'),
+(27, 3, '2024-08-05 02:57:32.258', 7000000, 'dendam sama orang', 'saya dendam sama seorang cewe dan saya nyewa pembunuh bayaran'),
+(28, 4, '2024-08-05 03:09:42.097', 100000000, 'berbagi sama teman', 'saya sukuran ke teman se kampus'),
+(29, 4, '2024-08-05 03:10:13.097', 6000000, 'gajian pertama setelah berheti judi', 'yeee akhirnya saya jadian'),
+(30, 4, '2024-08-05 03:11:06.754', -5000000, 'berbakti ke orang tua', 'saya akan mulai berpakti ke orang tua');
+
+
+
+CREATE TABLE rehabilitation (
+  id int NOT NULL,
+  provinsi varchar(255) DEFAULT NULL,
+  name varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  type enum('Rawat Inap','Rehabilitasi Narkoba Rawat Jalan') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+)  DEFAULT  COLLATE=utf8mb4_0900_ai_ci;
+
+
+INSERT INTO rehabilitation (id, provinsi, name, type) VALUES
+(1, 'Prov Aceh', 'Lapas Klas II A Banda Aceh', 'Rawat Inap'),
+(2, 'Prov Aceh', 'Lapas Klas III Narkotika Langsa', 'Rawat Inap'),
+(3, 'Prov Aceh', 'SPN Seulawah Aceh', 'Rawat Inap'),
+(4, 'Prov Aceh', 'Rindam Iskandar Muda', 'Rawat Inap'),
+(5, 'Prov Bali', 'SPN Singaraja', 'Rawat Inap'),
+(6, 'Prov Bali', 'Rindam Udayana', 'Rawat Inap'),
+(7, 'Prov Bali', 'Lapas Klas III Narkotika Bangli', 'Rawat Inap'),
+(8, 'Prov Bali', 'Lapas Klas IIB Tabanan', 'Rawat Inap'),
+(9, 'Prov Bali', 'Lapas Klas II A Denpasar', 'Rawat Inap'),
+(10, 'Prov Bangka Belitung', 'Lapas Klas III Narkotika Pangkal Pinang', 'Rawat Inap'),
+(11, 'Prov Banten', 'Pusdiklat Dinas Sosial Prov Banten (Pasir Ona)', 'Rawat Inap'),
+(12, 'Prov Banten', 'Pusdiklantas', 'Rawat Inap'),
+(13, 'Prov Banten', 'Lapas Klas I Tangerang', 'Rawat Inap'),
+(14, 'Prov Banten', 'Lapas Klas IIA Wanita Tangerang', 'Rawat Inap'),
+(15, 'Prov Banten', 'SPN Mandalawangi', 'Rawat Inap'),
+(16, 'Prov Banten', 'Lapas Pemuda Tangerang', 'Rawat Inap'),
+(17, 'Prov Bengkulu', 'SPN Bukit Kaba', 'Rawat Inap'),
+(18, 'Prov Bengkulu', 'Lapas Klas II A Bengkulu', 'Rawat Inap'),
+(19, 'Prov DI Yogyakarta', 'Lapas Klas II A Narkotika Yogyakarta', 'Rawat Inap'),
+(20, 'Prov DI Yogyakarta', 'Lapas Klas IIA Yogyakarta', 'Rawat Inap'),
+(21, 'Prov DKI Jakarta', 'Lapas Klas II A Narkotika Cipinang', 'Rawat Inap'),
+(22, 'Prov DKI Jakarta', 'Lapas Klas I Cipinang', 'Rawat Inap'),
+(23, 'Prov DKI Jakarta', 'Lapas Klas I Jakarta Pusat', 'Rawat Inap'),
+(24, 'Prov DKI Jakarta', 'Rindam Jaya', 'Rawat Inap'),
+(25, 'Prov DKI Jakarta', 'Pusdikes', 'Rawat Inap'),
+(26, 'Prov DKI Jakarta', 'RS Suyoto', 'Rawat Inap'),
+(27, 'Prov Gorontalo', 'Lapas Klas II A Gorontalo', 'Rawat Inap'),
+(28, 'Prov Jambi', 'SPN Jambi', 'Rawat Inap'),
+(29, 'Prov Jambi', 'Lapas Klas III Narkotika Muara Sabak', 'Rawat Inap'),
+(30, 'Prov Jambi', 'Lapas Klas II A Jambi', 'Rawat Inap'),
+(31, 'Prov Jawa Barat', 'Pusdikpom', 'Rawat Inap'),
+(32, 'Prov Jawa Barat', 'Pusdikif', 'Rawat Inap'),
+(33, 'Prov Jawa Barat', 'Lapas Klas II A Banceuy', 'Rawat Inap'),
+(34, 'Prov Jawa Barat', 'Lapas Klas II A Narkotika Bandung', 'Rawat Inap'),
+(35, 'Prov Jawa Barat', 'Lapas Klas II A Narkotika Gintung Cirebon', 'Rawat Inap'),
+(36, 'Prov Jawa Barat', 'Lapas Klas IIA Wanita Bandung', 'Rawat Inap'),
+(37, 'Prov Jawa Barat', 'Lapas Klas IIA Bogor', 'Rawat Inap'),
+(38, 'Prov Jawa Barat', 'Rindam Siliwangi', 'Rawat Inap'),
+(39, 'Prov Jawa Barat', 'Pusdikhubad', 'Rawat Inap'),
+(40, 'Prov Jawa Barat', 'Pusdik Binmas', 'Rawat Inap'),
+(41, 'Prov Jawa Barat', 'Pusdik Zeni', 'Rawat Inap'),
+(42, 'Prov Jawa Barat', 'Pusdik Intel', 'Rawat Inap'),
+(43, 'Prov Jawa Tengah', 'Lapas Klas II A Narkotika Nusakambangan', 'Rawat Inap'),
+(44, 'Prov Jawa Tengah', 'Lapas Klas I Semarang', 'Rawat Inap'),
+(45, 'Prov Jawa Tengah', 'Lapas Klas IIA Wanita Semarang', 'Rawat Inap'),
+(46, 'Prov Jawa Tengah', 'Lapas Klas IIA Magelang', 'Rawat Inap'),
+(47, 'Prov Jawa Tengah', 'Rindam Diponegoro', 'Rawat Inap'),
+(48, 'Prov Jawa Timur', 'Lapas Klas II A Narkotika Pamekasan', 'Rawat Inap'),
+(49, 'Prov Jawa Timur', 'Lapas Klas III Narkotika Madiun', 'Rawat Inap'),
+(50, 'Prov Jawa Timur', 'Lapas Klas I Malang', 'Rawat Inap'),
+(51, 'Prov Jawa Timur', 'Lapas Klas II A Pamekasan', 'Rawat Inap'),
+(52, 'Prov Jawa Timur', 'Lapas Klas I Madiun', 'Rawat Inap'),
+(53, 'Prov Jawa Timur', 'Lapas Klas IIA Sidoarjo', 'Rawat Inap'),
+(54, 'Prov Jawa Timur', 'Rindam Brawijaya', 'Rawat Inap'),
+(55, 'Prov Jawa Timur', 'TNI AL', 'Rawat Inap'),
+(56, 'Prov Jawa Timur', 'Pusdigasum', 'Rawat Inap'),
+(57, 'Prov Kalimantan Barat', 'SPN Pontianak', 'Rawat Inap'),
+(58, 'Prov Kalimantan Barat', 'Rindam TanjungPura', 'Rawat Inap'),
+(59, 'Prov Kalimantan Barat', 'Lapas Klas II A Pontianak', 'Rawat Inap'),
+(60, 'Prov Kalimantan Selatan', 'SPN BanjarBaru', 'Rawat Inap'),
+(61, 'Prov Kalimantan Selatan', 'Lapas Klas II A Narkotika Karang Intan', 'Rawat Inap'),
+(62, 'Prov Kalimantan Tengah', 'SPN Tjikriwut', 'Rawat Inap'),
+(63, 'Prov Kalimantan Tengah', 'Lapas Klas III Narkotika Kasongan', 'Rawat Inap'),
+(64, 'Prov Kalimantan Timur', 'Lapas Klas III Narkotika Samarinda', 'Rawat Inap'),
+(65, 'Prov Kalimantan Timur', 'Lapas Klas IIA Samarinda', 'Rawat Inap'),
+(66, 'Prov Kalimantan Timur', 'SPN Balikpapan', 'Rawat Inap'),
+(67, 'Prov Kalimantan Timur', 'Rindam Mulawarman', 'Rawat Inap'),
+(68, 'Prov Kepulauan Riau', 'Lapas Klas IIA Batam', 'Rawat Inap'),
+(69, 'Prov Kepulauan Riau', 'Lapas Klas IIA Tanjung Pinang', 'Rawat Inap'),
+(70, 'Prov Kepulauan Riau', 'Lapas Klas II A Narkotika Tanjung Pinang', 'Rawat Inap'),
+(71, 'Prov Lampung', 'SPN Kemiling', 'Rawat Inap'),
+(72, 'Prov Lampung', 'Loka Lampung', 'Rawat Inap'),
+(73, 'Prov Lampung', 'Lapas Klas I Bandar Lampung', 'Rawat Inap'),
+(74, 'Prov Lampung', 'Lapas Klas II A Narkotika Bandar Lampung', 'Rawat Inap'),
+(75, 'Prov Maluku Utara', 'Lapas Klas II A Ternate', 'Rawat Inap'),
+(76, 'Prov Maluku', 'Rindam Pattimura', 'Rawat Inap'),
+(77, 'Prov Maluku', 'Lapas Klas II A Ambon', 'Rawat Inap'),
+(78, 'Prov Nusa Tenggara Barat', 'SPN Belanting', 'Rawat Inap'),
+(79, 'Prov Nusa Tenggara Barat', 'Lapas Klas II A Mataram', 'Rawat Inap'),
+(80, 'Prov Nusa Tenggara Timur', 'SPN Kupang', 'Rawat Inap'),
+(81, 'Prov Papua Barat', 'Pemda Papua Barat', 'Rawat Inap'),
+(82, 'Prov Papua Barat', 'Lapas Papua Barat', 'Rawat Inap'),
+(83, 'Prov Papua', 'Rindam Cendrawasih', 'Rawat Inap'),
+(84, 'Prov Papua', 'Lapas Klas II A Narkotika Jayapura', 'Rawat Inap'),
+(85, 'Prov Papua', 'SPN Papua', 'Rawat Inap'),
+(86, 'Prov Riau', 'BNK Kampar', 'Rawat Inap'),
+(87, 'Prov Riau', 'Lapas Klas II A Pekanbaru', 'Rawat Inap'),
+(88, 'Prov Sulawesi Barat', 'Lapas Klas III Narkotika Mamuju', 'Rawat Inap'),
+(89, 'Prov Sulawesi Selatan', 'SPN Batua', 'Rawat Inap'),
+(90, 'Prov Sulawesi Selatan', 'Lapas Klas II A Narkotika Sungguminasa', 'Rawat Inap'),
+(91, 'Prov Sulawesi Selatan', 'Lapas Klas I Makassar', 'Rawat Inap'),
+(92, 'Prov Sulawesi Tengah', 'Rindam Tadulako', 'Rawat Inap'),
+(93, 'Prov Sulawesi Tenggara', 'SPN Kendari', 'Rawat Inap'),
+(94, 'Prov Sulawesi Utara', 'SPN Karombasan', 'Rawat Inap'),
+(95, 'Prov Sumatera Barat', 'SPN Padang Besi', 'Rawat Inap'),
+(96, 'Prov Sumatera Barat', 'Rindam Bukit Barisan', 'Rawat Inap'),
+(97, 'Prov Sumatera Barat', 'Lapas Klas II A Narkotika Kayutanam', 'Rawat Inap'),
+(98, 'Prov Sumatera Barat', 'Lapas Klas IIA Bukittinggi', 'Rawat Inap'),
+(99, 'Prov Sumatera Selatan', 'SPN Betung', 'Rawat Inap'),
+(100, 'Prov Sumatera Selatan', 'Lapas Klas IIA Lubuk Linggau', 'Rawat Inap'),
+(101, 'Prov Sumatera Selatan', 'Lapas Klas IIA Narkotika Banyuasin', 'Rawat Inap'),
+(102, 'Prov Sumatera Selatan', 'Rindam Sriwijaya', 'Rawat Inap'),
+(103, 'Prov Sumatera Selatan', 'Lapas Klas I Palembang', 'Rawat Inap'),
+(104, 'Prov Sumatera Selatan', 'Lapas Klas IIA Wanita Palembang', 'Rawat Inap'),
+(105, 'Prov Sumatera Selatan', 'Puslatpur', 'Rawat Inap'),
+(106, 'Prov Sumatera Utara', 'Lapas Klas I Medan', 'Rawat Inap'),
+(107, 'Prov Sumatera Utara', 'Lapas Klas III Narkotika Siantar', 'Rawat Inap'),
+(108, 'Prov Sumatera Utara', 'SPN Sampali', 'Rawat Inap'),
+(109, 'Prov Sumatera Utara', 'Lapas Klas IIA Lubuk Pakam', 'Rawat Inap'),
+(110, 'Prov Sumatera Utara', 'Lapas Klas IIA Pematang Siantar', 'Rawat Inap'),
+(111, 'Prov Sumatera Utara', 'Rindam Bukit Barisan', 'Rawat Inap'),
+(112, 'Prov Sumatera Barat', 'RS Jiwa Dr. H.B Saanin Padang', 'Rehabilitasi Narkoba Rawat Jalan'),
+(113, 'Prov Sumatera Utara', 'RS Jiwa Prof. Dr. M. Ildrem Medan', 'Rehabilitasi Narkoba Rawat Jalan'),
+(114, 'Prov Riau', 'RS Jiwa Tampan Pekanbaru', 'Rehabilitasi Narkoba Rawat Jalan'),
+(115, 'Prov Jambi', 'RS Jiwa Jambi', 'Rehabilitasi Narkoba Rawat Jalan'),
+(116, 'Prov Sumatera Selatan', 'RS Ernaldi Bahar Palembang', 'Rehabilitasi Narkoba Rawat Jalan'),
+(117, 'Prov Lampung', 'RS Jiwa Provinsi Lampung', 'Rehabilitasi Narkoba Rawat Jalan'),
+(118, 'Prov DKI Jakarta', 'RS Jiwa Dr. Soeharto Heerdjan Jakarta', 'Rehabilitasi Narkoba Rawat Jalan'),
+(119, 'Prov Jawa Barat', 'RS Jiwa Bandung', 'Rehabilitasi Narkoba Rawat Jalan'),
+(120, 'Prov Jawa Tengah', 'RS Jiwa Dr. Amino Gondohutomo Semarang', 'Rehabilitasi Narkoba Rawat Jalan'),
+(121, 'Prov Jawa Timur', 'RS Jiwa Dr. Radjiman Wediodiningrat Malang', 'Rehabilitasi Narkoba Rawat Jalan'),
+(122, 'Prov Bali', 'RS Jiwa Bangli', 'Rehabilitasi Narkoba Rawat Jalan'),
+(123, 'Prov Nusa Tenggara Barat', 'RS Jiwa Mutiara Sukma NTB', 'Rehabilitasi Narkoba Rawat Jalan'),
+(124, 'Prov Kalimantan Barat', 'RS Jiwa Sungai Bangkong Pontianak', 'Rehabilitasi Narkoba Rawat Jalan'),
+(125, 'Prov Kalimantan Tengah', 'RS Jiwa Kalawa Atei Palangkaraya', 'Rehabilitasi Narkoba Rawat Jalan'),
+(126, 'Prov Kalimantan Selatan', 'RS Jiwa Sambang Lihum Banjarmasin', 'Rehabilitasi Narkoba Rawat Jalan'),
+(127, 'Prov Kalimantan Timur', 'RS Jiwa Daerah Atma Husada Mahakam Samarinda', 'Rehabilitasi Narkoba Rawat Jalan'),
+(128, 'Prov Sulawesi Utara', 'RS Jiwa Ratumbuysang Manado', 'Rehabilitasi Narkoba Rawat Jalan'),
+(129, 'Prov Sulawesi Selatan', 'RS Jiwa Dr. V. L. Ratumbuysang Manado', 'Rehabilitasi Narkoba Rawat Jalan'),
+(130, 'Prov Sulawesi Selatan', 'RS Jiwa Dr. V.L. Ratumbuysang Manado', 'Rehabilitasi Narkoba Rawat Jalan'),
+(131, 'Prov Sulawesi Tenggara', 'RS Jiwa Kendari', 'Rehabilitasi Narkoba Rawat Jalan'),
+(132, 'Prov Sulawesi Tengah', 'RS Jiwa Madani Palu', 'Rehabilitasi Narkoba Rawat Jalan'),
+(133, 'Prov Gorontalo', 'RS Jiwa Gorontalo', 'Rehabilitasi Narkoba Rawat Jalan'),
+(134, 'Prov Maluku', 'RS Jiwa Dr. R. M. Jojo Binangun Maluku', 'Rehabilitasi Narkoba Rawat Jalan'),
+(135, 'Prov Papua', 'RS Jiwa Jayapura', 'Rehabilitasi Narkoba Rawat Jalan');
+
+
+
+CREATE TABLE task (
+  id int NOT NULL,
+  name varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  points tinyint NOT NULL,
+  body text COLLATE utf8mb4_unicode_ci NOT NULL
+)  DEFAULT  COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO task (id, name, points, body) VALUES
+(1, 'Reading Motivational Articles\r\n', 3, '""There is no such thing as failure, its just a matter of time.""'),
+(2, 'Creating a Financial Plan\r\n', 4, ''),
+(3, 'Recording Gambling Triggers\r\n', 5, ''),
+(4, 'Creating Long-Term Plans', 9, '');
+
+
+
+CREATE TABLE user (
+  id int NOT NULL,
+  createdAt datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  clerkUserId varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  place varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+)  DEFAULT  COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO user (id, createdAt, clerkUserId, place) VALUES
+(3, '2024-08-05 00:20:21.282', 'user_2kDTbQroYBH1rWzKbHOAYgbGFG1', ''),
+(4, '2024-08-05 03:09:12.676', 'user_2kDo8tJv7wD7osIl0LLk57MEvFg', '');
+
+
+
+CREATE TABLE usertask (
+  id int NOT NULL,
+  taskId int NOT NULL,
+  note varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  userId int NOT NULL,
+  createdAt datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)
+)  DEFAULT  COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO usertask (id, taskId, note, userId, createdAt) VALUES
+(17, 1, 'hellohellohellohellohellohello', 3, '2024-08-05 00:20:59.564'),
+(18, 2, 'hellohellohellohellohellohello', 3, '2024-08-05 00:21:02.631'),
+(19, 3, 'hellohellohellohellohellohello', 3, '2024-08-05 00:21:04.084'),
+(20, 4, 'hellohellohellohellohellohello', 3, '2024-08-05 00:21:04.512');
+
+
+ALTER TABLE debt
+  ADD PRIMARY KEY (id),
+  ADD KEY Debt_userId_fkey (userId);
+
+ALTER TABLE rehabilitation
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE task
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE user
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY User_clerkUserId_key (clerkUserId);
+
+ALTER TABLE usertask
+  ADD PRIMARY KEY (id),
+  ADD KEY DailyTask_userId_fkey (userId),
+  ADD KEY Task_fk (taskId);
+
+
+ALTER TABLE debt
+  MODIFY id int NOT NULL AUTOINCREMENT, AUTOINCREMENT=31;
+
+ALTER TABLE rehabilitation
+  MODIFY id int NOT NULL AUTOINCREMENT, AUTOINCREMENT=136;
+
+ALTER TABLE task
+  MODIFY id int NOT NULL AUTOINCREMENT, AUTOINCREMENT=5;
+
+ALTER TABLE user
+  MODIFY id int NOT NULL AUTOINCREMENT, AUTOINCREMENT=5;
+
+ALTER TABLE usertask
+  MODIFY id int NOT NULL AUTOINCREMENT, AUTOINCREMENT=21;
+
+
+ALTER TABLE debt
+  ADD CONSTRAINT Debt_userId_fkey FOREIGN KEY (userId) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE usertask
+  ADD CONSTRAINT DailyTask_userId_fkey FOREIGN KEY (userId) REFERENCES user (id) ON UPDATE RESTRICT,
+  ADD CONSTRAINT Task_fk FOREIGN KEY (taskId) REFERENCES task (id) ON UPDATE RESTRICT;
+
+
+
+

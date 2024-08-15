@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model debt {
@@ -14,31 +14,31 @@ model debt {
   amount Float
   type   String
   note   String?
-  user   user     @relation(fields: [userId], references: [id], map: "Debt_userId_fkey")
+  user   user     @relation(fields: [userId], references: [id])
 
-  @@index([userId], map: "Debt_userId_fkey")
+  @@index([userId])
 }
 
 model rehabilitation {
-  id       Int                  @id @default(autoincrement())
-  provinsi String?              @db.VarChar(255)
-  name     String?              @db.VarChar(255)
-  type     rehabilitation_type?
+  id       Int     @id @default(autoincrement())
+  provinsi String?
+  name     String?
+  type     String?  // Values: "Rawat_Inap", "Rehabilitasi_Narkoba_Rawat_Jalan"
 }
 
 model task {
   id       Int        @id @default(autoincrement())
-  name     String     @db.VarChar(255)
-  points   Int        @db.TinyInt
-  body     String     @db.Text
+  name     String
+  points   Int
+  body     String
   usertask usertask[]
 }
 
 model user {
   id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now())
-  clerkUserId String?    @unique(map: "User_clerkUserId_key")
-  place       String     @db.VarChar(225)
+  clerkUserId String?    @unique
+  place       String
   debt        debt[]
   usertask    usertask[]
 }
@@ -49,14 +49,9 @@ model usertask {
   note      String
   userId    Int
   createdAt DateTime @default(now())
-  user      user     @relation(fields: [userId], references: [id], map: "DailyTask_userId_fkey")
-  task      task     @relation(fields: [taskId], references: [id], onUpdate: Restrict, map: "Task_fk")
+  user      user     @relation(fields: [userId], references: [id])
+  task      task     @relation(fields: [taskId], references: [id])
 
-  @@index([userId], map: "DailyTask_userId_fkey")
-  @@index([taskId], map: "Task_fk")
-}
-
-enum rehabilitation_type {
-  Rawat_Inap                       @map("Rawat Inap")
-  Rehabilitasi_Narkoba_Rawat_Jalan @map("Rehabilitasi Narkoba Rawat Jalan")
+  @@index([userId])
+  @@index([taskId])
 }
