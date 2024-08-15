@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:/vercel/output/dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model debt {
@@ -20,17 +20,17 @@ model debt {
 }
 
 model rehabilitation {
-  id       Int     @id @default(autoincrement())
-  provinsi String?
-  name     String?
-  type     String?  // Values: "Rawat_Inap", "Rehabilitasi_Narkoba_Rawat_Jalan"
+  id       Int                  @id @default(autoincrement())
+  provinsi String?              @db.VarChar(255)
+  name     String?              @db.VarChar(255)
+  type     rehabilitation_type?
 }
 
 model task {
   id       Int        @id @default(autoincrement())
-  name     String
-  points   Int
-  body     String
+  name     String     @db.VarChar(255)
+  points   Int        @db.SmallInt
+  body     String     @db.Text
   usertask usertask[]
 }
 
@@ -38,7 +38,7 @@ model user {
   id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now())
   clerkUserId String?    @unique
-  place       String
+  place       String     @db.VarChar(225)
   debt        debt[]
   usertask    usertask[]
 }
@@ -50,8 +50,13 @@ model usertask {
   userId    Int
   createdAt DateTime @default(now())
   user      user     @relation(fields: [userId], references: [id])
-  task      task     @relation(fields: [taskId], references: [id])
+  task      task     @relation(fields: [taskId], references: [id], onUpdate: Restrict)
 
   @@index([userId])
   @@index([taskId])
+}
+
+enum rehabilitation_type {
+  Rawat_Inap @map("Rawat Inap")
+  Rehabilitasi_Narkoba_Rawat_Jalan @map("Rehabilitasi Narkoba Rawat Jalan")
 }
